@@ -1,0 +1,5 @@
+genrule(
+    name = "greeting",
+    outs = ["greeting.txt"],
+    cmd_bat = "ping -n 6 127.0.0.1 > nul & echo hello from anvil > $@",
+)

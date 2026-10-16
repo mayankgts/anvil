@@ -10,6 +10,7 @@ import (
 	"os/signal"
 
 	repb "github.com/bazelbuild/remote-apis/build/bazel/remote/execution/v2"
+	bspb "google.golang.org/genproto/googleapis/bytestream"
 	"google.golang.org/grpc"
 
 	"github.com/mayankgts/anvil/internal/ac"
@@ -47,6 +48,7 @@ func run(addr, dir string) error {
 	repb.RegisterCapabilitiesServer(srv, server.CapabilitiesServer{})
 	repb.RegisterContentAddressableStorageServer(srv, &server.CASServer{Store: store})
 	repb.RegisterActionCacheServer(srv, &server.ACServer{Cache: cache})
+	bspb.RegisterByteStreamServer(srv, &server.ByteStreamServer{Store: store})
 
 	ctx, stop := signal.NotifyContext(context.Background(), os.Interrupt)
 	defer stop()
