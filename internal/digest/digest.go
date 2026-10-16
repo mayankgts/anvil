@@ -19,6 +19,7 @@ type Digest struct {
 
 // ErrInvalid is returned when a hash or size is malformed.
 var ErrInvalid = errors.New("invalid digest")
+var Empty = FromBytes(nil)
 
 // New validates hash and size and returns a Digest.
 // hash must be exactly 64 lowercase hex characters; size must be >= 0.
